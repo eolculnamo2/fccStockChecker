@@ -2,9 +2,16 @@
 require('dotenv').config();
 const express = require('express');
 const app = express();
-const helmet = require('express');
+const helmet = require('helmet');
 const mongoose = require('mongoose');
-const api = require('./routes/StockFunctions');
+const api = require('./routes/apiController');
+
+// app.use(helmet.contentSecurityPolicy({
+//     directives: {
+//       defaultSrc: ["'script.js'"],
+//       styleSrc: ["'self'"]
+//     }
+//   }))
 
 app.use(express.static('public'));
 
@@ -17,6 +24,7 @@ mongoose.connection.once('open',()=>{
     console.log("Connected to Mongo via Mongoose")
     }).on('error',(err) => console.log("Connection Error: " + err));
 
+app.use('/api',api);
 app.listen(3000, () => console.log('Server On') )
 
 /*
