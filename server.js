@@ -6,12 +6,12 @@ const helmet = require('helmet');
 const mongoose = require('mongoose');
 const api = require('./routes/apiController');
 
-// app.use(helmet.contentSecurityPolicy({
-//     directives: {
-//       defaultSrc: ["'script.js'"],
-//       styleSrc: ["'self'"]
-//     }
-//   }))
+app.use(helmet.contentSecurityPolicy({
+    directives: {
+      defaultSrc: ["'script.js'"],
+      styleSrc: ["'self'"]
+    }
+  }))
 
 app.use(express.static('public'));
 
